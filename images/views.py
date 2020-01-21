@@ -6,9 +6,7 @@ from rest_framework.parsers import JSONParser, MultiPartParser, FormParser
 class ImageList(mixins.ListModelMixin,
                      mixins.CreateModelMixin,
                      generics.GenericAPIView):
-    """
-     List all restaurant, or create a restaurant
-    """
+
     parser_classes = (JSONParser, MultiPartParser, FormParser,)
     queryset = Image.objects.all()
     serializer_class = ImageSerializer
