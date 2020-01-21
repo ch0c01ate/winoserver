@@ -1,20 +1,20 @@
-from django.http import HttpResponse
-from django.shortcuts import render, redirect
-from .forms import *
+from .serializers import ImageSerializer
+from .models import Image
+from rest_framework import mixins, generics
+from rest_framework.parsers import JSONParser, MultiPartParser, FormParser
 
+class ImageList(mixins.ListModelMixin,
+                     mixins.CreateModelMixin,
+                     generics.GenericAPIView):
+    """
+     List all restaurant, or create a restaurant
+    """
+    parser_classes = (JSONParser, MultiPartParser, FormParser,)
+    queryset = Image.objects.all()
+    serializer_class = ImageSerializer
 
-# Create your views here.
-def image_view(request):
-    if request.method == 'POST':
-        form = ImageForm(request.POST, request.FILES)
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
 
-        if form.is_valid():
-            form.save()
-            return redirect('success')
-    else:
-        form = ImageForm()
-    return render(request, 'image_form.html', {'form': form})
-
-
-def success(request):
-    return HttpResponse('successfully uploaded')
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
