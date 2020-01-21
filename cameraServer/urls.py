@@ -1,11 +1,10 @@
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from images.views import *
+from images import views
 
 urlpatterns = [
-    path('image_upload', image_view, name='image_upload'),
-    path('success', success, name='success'),
+    path("images/", views.ImageList.as_view()),
 ]
 
 if settings.DEBUG:
