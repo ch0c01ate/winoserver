@@ -25,7 +25,7 @@ SECRET_KEY = ')2rqyda$)!7pdbo-(ppg+*5@yysjf7hu01lucz_x*y3^u1wme@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['choco1ate.pythonanywhere.com']
 
 
 # Application definition
